@@ -1,0 +1,34 @@
+## CHAPTER 6 - ABSTRACTION
+
+## Abstraction: used as a labor saver but it is the key to making computer programs understandable to humans
+##              and as concise as possible 
+page = download_page()
+freqs = compute_frequencies(page)
+for word, freq in freqs:
+    print word, freq
+
+## Creating Your Own Functions: a set of code that can be called to run and return a value
+def hello(name):                        #def defines the function hello which returns a string with the greeting
+    return 'Hello, ' + name + '!'       #for its only parameter
+def fibs(num):                                      #functions returns a list of Fibonacci numbers where the number
+    result = [0, 1]                                 #is received as a parameter rather than as input from the
+    for i in range(num-1):                          #user
+        result.append(result[-2] + result[-1])
+    return result
+
+## Documenting Functions: adding notes and explanations to functions by commenting or using a docstring 
+def square(x):      
+    'Calculates the square of the number x.'        #the docstring may be accessed as square.__doc__
+    return x*x
+
+## Functions That Aren't Functions: certain functions don't return anything as they do not have a return statement
+##                                  but they are considered functions nonetheless
+def test(): 
+    print 'This is printed'         
+    return                          #the return statement here is simply used to end the function 
+    print 'This is not'
+
+## Parameters: variables and elements provided to run the function; assinging a parameter inside a funciton will 
+##             not affect the variables outside the function
+
+
