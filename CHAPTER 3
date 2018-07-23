@@ -1,0 +1,46 @@
+## CHAPTER 3 - WORKING WITH STRINGS
+
+## Basic String Operations: all standard sequence operations work with strings, however item and slice
+##                          assignments are illegal as strings are immutable 
+
+## String Methods: many string methods are inherited from the string module where they exist as functions
+
+## Find: a method used to find a substring within a larger string abd returns the leftmost index where the
+##       substring is found; if it is not found, -1 is returned
+title = "Monty Python's Flying Circus"
+title.find('Monty')     #value returned is 0
+title.find('Python')    #value returned is 6
+title.find('Flying')    #value returned is 15
+title.find('Zirquss')   #value returned is -1
+
+## Join: a string method that is the inverse of split; used to join the elements of a sequence
+seq = [1, 2, 3, 4, 5] 
+sep = '+'
+seq = ['1', '2', '3', '4', '5']
+sep.join(seq) 
+
+## Lower: method returns a lowercase version of the string
+'Trondheim Hammer Dance'.lower()       #value prints out 'trondheim hammer dance'
+## method is useful for writing code that is case insensitive (code that ignores the difference between 
+## upper and lower case letters) 
+
+## Replace: returns a string where all the occurrences of one string have been replaced by another
+'This is a test'.replace('is', 'eez')
+'Theez eez a test'
+
+## Split: the inverse of join and it is used to split a string into a sequence
+'1+2+3+4+5'.split('+')
+['1', '2', '3', '4', '5']
+
+## Strip: method returns a string where whitespace on the left and right has been removed
+'          internal whitespace is kept          '.strip()
+## value returned is 'internal whitespace is kept'
+## useful when comparing input to stored values such as when the user accidentally tupes a space after his name
+names = ['gumby', 'smith', 'jones']
+name = 'gumby '
+if name in names: print 'Fount it!'             #returns no value 
+if name.strip() in names: print 'Found it!'     #returns Found it!
+## it is possible to specify which characters 
+
+## Translate: method replaces parts of a string but that it only works with single characters and requires a 
+##            translation table (a table with a full listing of which characters should be replaced by which)
