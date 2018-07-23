@@ -1,0 +1,185 @@
+## CHAPTER 5 - CONDITIONALS, LOOPS, AND SOME OTHER STATEMENTS
+
+## Printing: it is possible to print more than one expression as long as they are separated with commas;
+##           the technique is useful if it is needed to combine text and variable values without using 
+##           complicated string formatting 
+print 'Age:', 42        #function prints 'Age: 42'
+
+## Conditions and Conditional Statements: these statements allow the program to choose whether or not 
+##                                        to execute a block of code 
+
+## Boolean Values: also known as truth values, represent either a value of either true or false
+False, None, 0, "", (), {}, []      #these values are all considered false by the interpreter so 
+                                    #everything else is considered true 
+
+## If Statement: allows for conditional execution if the condition is evaluated as true
+name = raw_input('What is your name? ')
+if name.endswith('Gumby'): 
+    print 'Hello, Mr. Gumby'
+
+## Else Clauses: statement that allows for an alternative condition as a part of the if statement 
+name = raw_input('What is your name? ')
+if name.endswith('Gumby'):
+    print 'Hello, Mr. Gumby'
+else:
+    print 'Hello, stranger'
+
+## Elif Clause: short for 'else if' which is a combination of an if and an else clause
+num = input('Enter a number: ')
+if num > 0:
+    print 'The number is positive'
+elif num < 0:
+    print 'The number is negative'
+else:
+    print 'The number is zero'
+
+## Nesting Blocks: blocks of code/conditions inside other if statement blocks
+name = raw_input('What is your name? ')
+if name.endswith('Gumby'):
+    if name.startswith('Mr.'):              #block of code here would be a nested if statement since
+        print 'Hello, Mr. Gumby'            #it is within another larger if statement
+    elif name.startswith('Mrs.'):
+        print 'Hello, Mrs. Gumby'
+    else:
+        print 'Hello, Gumby'
+else:
+    print 'Hello, stranger'
+
+## Comparison Operators: operations used to compare elements 
+x == y          # x equals y
+x < y           # x is less than y
+x > y           # x is greater than y
+x >= y          # x is greather than or equal to y
+x <= y          # x is less than or equal to y
+x != y          # x is not equal to y
+x is y          # x and y are the same object
+x is not y      # x and y are different objects 
+x in y          # x is a member of the container y
+x not in y      # x is not a member of the container y
+
+## Assertions: a useful relative of the if statement that essentially crashes the program if the condition 
+##             is not met, it's better to crash a program when an error condition emerges rather than crashing
+##             at a later time
+age = 10                                            #if age was not within the range provided, 
+assert 0 < age < 100                                #the code returns AssertionError                                                                       
+assert 0 < age < 100, 'The age must be realistic'   #it's possible to a string after the condition
+                                                    #to explain the assertion
+                                                    
+## Loops: a program that repeats a set of code or operation several times until stopped
+
+## While loops: repeats the code while any condition evaluates to true
+name = ''
+while not name:                                     #code continuously runs because name is an empty string which
+    name = raw_input('Please enter your name: ')    #evaluates to true against not name
+print 'Hello, %s!' % name
+
+## For Loops: more specific than the while loop and performs a block of code for each element of a set of values
+words = ['this', 'is', 'an', 'ex', 'parrot']
+for word in words:                                  #code continuously prints 'word' for the amount of elements 
+    print word                                      #within words
+range(1,10)                                         #a build-in range function that could be used for looping
+
+## Iterating Over Dictionaries: it's possible to use a plain for statement to loops over the keys of a 
+##                              dictionary 
+d = {'x': 1, 'y': 2, 'z': 3}
+for key in d:
+    print key, 'corresponds to', d[key]
+
+## Parallel Iteration: used to iterate over two sequences at the same time 
+names = ['anne', 'beth', 'george', 'damon']         #code prints out names with corresponding ages
+ages = [12, 45, 32, 102]                            #the variable i serves as a standard variable name for 
+for i in range(len(names)):                         #loop indices
+    print names[i], 'is', ages[i], 'years old'
+zip(names, ages)                                    #the zip function combines the sequences, returning a list tuples
+for name, age in zip(names, ages):                  #tuples can be unpacked in a loop
+    print name, 'is', age, 'years old'
+
+## Numbered Iteration: used to iterate over a sequence of objects while having access to the index of the current
+##                     object
+# eg. replacing every string that contains the substring 'xxx' in a list of strings
+for string in strings: 
+    if 'xxx' in string:
+        index = string.index(string)        #searching for the string in the list of strings
+        strings[index] = '[censored]' 
+
+## Reversed and Sorted Iteration: funtions that are similar to the list methods reverse and sort that work on any 
+##                                sequence or iterable object; they return reversed and sorted versions
+sorted([4, 3, 6, 7, 3])             #returns [3, 3, 4, 6, 8]
+sorted('Hello, world!')             #returns [' ', '!', ',', 'H', 'd', 'e', 'l', 'l', 'l', 'o', 'o', 'r', 'w']
+list(reversed('Hello, world!'))     #returns ['!', 'd', 'l', 'r', 'o', 'w', ' ', ',', 'o', 'l', 'l', 'e', 'H']
+''.join(reversed('Hello, world!'))  #returns '!dlrow ,olleH'
+
+## Breaking Out of Loops: a loop simply executes a block until its condition becomes falso or used up all sequence
+##                        elements but a break is used to interrupt a loop, to start a new iteration, or to end 
+##                        the loop
+
+## Break: used to end/break out of a loop
+# eg, finding the largest square below 100 
+from math import sqrt 
+for n in range(99, 0, -1):              #returns 81 and stops 
+    root = sqrt(n)                     #-1 is the step of the range so that the sequence begins at 99 and decreases 
+    if root == int(root):               #by -1 every time 
+        print n 
+        break
+
+## Continue: stops the current interation and skips to the rest of the loop body but does not end the loop
+for x in seq: 
+    if condition1: continue
+    if condition2: continue 
+    if contition3: continue
+    do_something()
+    do_something_else()
+    do_another_thing()
+    etc()
+
+## The While True/Break Idiom: a more flexible way to break a loop
+while True:                                         #while true gives a loops that never terminates on its own          
+    word = raw_input('Please enter a word: ')       
+    if not word: break                              #the if statement within the code breaks when the condition is 
+    print "The word was " + word                #fufilled 
+
+## Else Clauses in Loops: used to run a set of code if the loops was not broken out
+broke_out = False 
+for x in seq:
+    do_something(x)
+    if condition(x):
+        broke_out = True
+        break
+    do_something_else(x)
+if not broke_out:
+    print "I didn't break out!"
+from math import sqrt                   #another way is to use an else clause to your loop which is only executed
+for n in range(99, 81, -1):             #if the break was not called
+    root = sqrt(n)
+    if root == int(root):
+        print n 
+        break
+    else:
+        print "Didn't find it!"
+
+## List Comprehension: a way of making lists from other lists
+[x*x for x in range(10)]                            #returns [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+[x*x for x in range(10) if x % 3 == 0]              #returns [0, 9 , 36, 81] squares divisible by 3
+girls = ['alice', 'bernice', 'clarice']                 #can be combined with an if clause 
+boys = ['chris', 'arnold', 'bob']                       #returns ['chris+clarice', 'arnold+alice', 'bob+bernice']   
+[b+'+'+g for b in boys for g in girls if b[0] == g[0]]  
+     
+## Pass Statements: a statement that does nothing which is often used for testing
+if name == 'Ralph Auldus Melish': 
+     print 'Welcome!'
+elif name == 'Enid':  
+    pass                            #this block of code for the if statement is not finished yet so pass is used     
+elif name == 'Bill Gates':
+    print 'Access Denied'
+
+## Del Statement: a delete statement that removes both a reference to the object and the object itself
+x = 1 
+del x       #calling x will return an error
+
+## Exec Statement: used execute code as a statement or evaluate it as an expression 
+from math import sqrt
+exec "sqrt = 1"
+sqrt(4)                 #returns an error that the object is not callable 
+
+## Eval Statement: evaluates a Python expression written in a string and returns the resulting value
+eval(raw_input("Enter an arithmetic expression: "))     #inputing 6+18*2 returns 42
