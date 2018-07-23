@@ -1,0 +1,126 @@
+## CHAPTER 4 - DICTIONARIES: WHEN INDICES WON'T DO
+
+## Mapping: a data structure type where each value can be referred to by name
+
+## Disctionary: a type of data structure; consisting of pairs of keys separated from their corresponding 
+##              values by a colon, all the itens are separated by commas, and the whole thing is 
+##              enclosed in curly brackets
+phonebook = {'Alice':'2341', 'Beth':'9201', 'Cecil':'3258'}
+
+## The Dict Function: a function used to construct dictionaries from other mappings
+items = [('name', 'Gumby',('age',42))]
+d = dict(items)         #the value of d is {'age':42, 'name': 'Gumby'}
+d['name']               #value returned is 'Gumby'
+
+## Basic Dictionary Operations: basic dictionary behaviour mirrors that of a sequence
+len(d)      #returns the number of key-value pairs in d
+d[k]        #retuns the value associated with the key k
+d[k] = v    #associates the value v with the key k
+del d[k]    #deletes the item with the key k
+k in d      #checks whether there is an item in d that has the key k 
+
+## There are some important distinctions between dictionaries and lists:
+##  Key Types: dictionary keys can be any immutable type
+##  Automatic Addition: a value may be assigned to a key even if the key isn't in the dictionary which  
+##                      creates a new item; however an index outside of a list's range cannot have a value
+##                      assigned to it
+## Membership: the expression k in d looks for a key not a value; however the expression v in l looks for a
+##             value rather than an index
+
+# eg. a simple database where each person is represented as another dictionary with the keys 'phone' and 
+#     'addr':
+people = {
+    'Alice':{
+        'phone':'2341',
+        'addr': 'Foo Drive 23'
+    },
+    'Beth':{
+        'phone':'9102',
+        'addr': 'Bar Street 42'
+    },
+    'Cecil':{
+        'phone':'3158',
+        'addr': 'Baz Avenue 90'
+    }
+}
+# descriptive labels for the phone number and address which will be used when printing the output:
+labels = {
+    'phone':'phone number',
+    'addr': 'address'
+}
+name = raw_input('Name: ') 
+# ask if the desired return is a phone number or an address:
+request = raw_input('Phone number (p) or Address (a)? ')
+# use the correct key: 
+if request == 'p':
+    key = 'phone'
+if request == 'a':
+    key = 'addr'
+# only try to print information if the name is a valid key in the dictionary:
+if name in people:
+    print "%s's %s is %s." %\
+    (name, labels[key], people[name[key]])
+
+## String Formatting with Dictionaries: it is easier to format strings within a dictionary instead of within
+##                                      tuples
+phonebook = {'Beth':'9102', 'Alice':'2341', 'Cecil':'3258'}
+"Cecil's phone number is %(Cecil)s." % phonebook
+#returns the statement "Cecil's phone number is 3258."
+## string formatting is very useful in template systems (such as using HTML): 
+template = '''<html>
+    <head><title>%(title)s</title></head>
+    <body>
+    <h1>%(title)s</h1>
+    <p>%(text)s</p>
+    </body>'''
+data = {'title': 'My Home Page', 'text': 'Welcome to my home page!'}
+print template % data
+#returns the following: 
+<html>
+<head><title>My Home Page</title></head>
+<body>
+<h1>My Home Page</h1>
+<p>Welcome to my home page!</p>
+</body>
+
+## Dictionary Methods: dictionary methods can be very useful however they are not used that often
+
+## Clear: removes all items from the dictionary 
+d = {}
+d['name'] = 'Gumby'
+d['age'] = 42                   #value of d becomes {'age': 42, 'name': 'Gumby'}
+returned_value = d.clear()      #value of d now becomes {0}
+
+## Copy: returns a new dictionary with the same key-value pairs
+x = {'username': 'admin', 'machines': ['foo', 'bar', 'baz']}
+y = x.copy()
+y['username'] = 'mlh'               #value of x is {'username': 'admin', 'machines': ['foo', 'baz']}
+y['machines'].remove('bar')         #value of y is {'username': 'mlh', 'machines': ['foo', 'baz']}
+
+## fromKeys: method creates a new dictionary with the given keys each with a default corresponding value of 
+##           None
+{}.fromkeys(['name', 'age'])                      #value returned is {'age': None, 'name': None}
+dict.fromkeys(['name', 'age'], '(unknown)')       #another default 'unknown' instead of None is used
+
+## Get: another way of accessing dictionary items that's more clean; whehn accessing a nonexistant key, there
+##      is no exception and None is returned instead (a default value instead of None may be used)
+d = {} 
+print d.get['name']     #returns 'None'
+d.get('name','N/A')     #returns 'N/A'
+
+# a simple database made using get()
+labels = {                                                  #Where the database information should be entered
+    'phone': 'phone number',
+    'addr': 'address'
+}
+name = raw_input('Name: ')
+request = raw_input('Phone number (p) or Address (a)? ')    #Ask what the user is looking for
+key = request 
+if request == 'p':
+    key = 'phone'
+if request == 'a':
+    key = 'addr'
+person = people.get(name, {})                               #Using get to provide default values
+label = labels.get(key, key)
+result = person.get(key, 'not availble')
+print "%s's %s is %s." %(name, label, result)               #Printing the results 
