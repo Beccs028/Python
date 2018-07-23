@@ -1,0 +1,172 @@
+## CHAPTER 2 - LISTS AND TUPLES
+
+## Data structures: a collection of data elements such as numbers, characters, or even other data structures
+##                  that is structred in some way, such as by numbering the elements 
+## A Sequence: the most basic data structure in Python where each element within it is assigned a number as
+##             its position, or index; the index begins at 0 (rather than 1); are useful for working with a 
+##             collection of values
+
+## One of the reason that the numbering scheme begins at 0 is that it is possible to count from the end; in
+## other words, it is possible to count forwards and backwards beginning from 0.
+
+## Lists: lists can be changed, so elements may be added or removed; most programs allow the use of lists 
+##        except for some exceptions such as dictionary keys
+## Tuples: tuples cannot be changed so elements within cannot be manipulated
+
+# eg. A sequence representing a person in a database, the first element is the name and the second is the age
+# As a list:
+edward = ['Edward Gumby', 42] 
+john = ['John Smith', 50]
+# As a databse:
+databse = [edward, john]
+
+
+## Common Sequence Operations: operations used for analysing and manipulating sequences and their elements
+
+## Indexing: accessing an element within the sequence of a specific index
+greeting = 'Hello'
+greeting[0]     #value is 'H'
+greeting[-1]    #value is 'o'; negative index values means that elements are counted from right to left 
+                #instead; -1 would be the last element, -2 is the second last element, and so on
+## Strings may be indexed directly without using a varibale to refer to them
+
+# eg. A sample program that prints out the proper date given the year, the month, and the date as number values
+months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+    ]
+endings = ['st', 'nd', 'rd'] + 17 * ['th'] \
+        + ['st', 'nd', 'rd'] + 7 * ['th'] \
+        + ['st']
+year    = raw_input('Year: ')
+month   = raw_input('Month (1-12: ')
+day     = raw_input('Day (1-31): ')
+month_number    = int(month)
+day_number      = int(day)
+month_name  = months[month_number - 1]  #since index beigns at 0, subtract 1 to get the correct month/day
+ordinal     = day + endings[day_number - 1]
+print month_name + ' ' + ordinal + ', ' + year
+
+## Slicing: used to access ranges of elements rather than a specific one
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbers[3:6]    #value is [4, 5, 6,]
+## The first number is the index of the element that is included while the last number is the index of the
+## element after the last element in the slice. In other words, the first index is inclusive while the 
+## second is exclusive. 
+## Any of the indexes may be left blank to include elements within the sequence to the end. 
+
+## Slicing Steps: the step length between the elements within a sequence
+numberset = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberset[0:10:2]      #value is [1, 3, 5, 7, 9]
+
+## Adding Sequences: the operation allows sequences to be concatenated
+[1, 2, 3] + [4, 5, 6]       #value is [1, 2, 3, 4, 6]
+'Hello, ' + 'world!'        #value is 'Hello, world!'
+
+## Multiplication: creates a new sequence where the original sequence is repeated x times
+'python' * 5        #value is 'pythonpythonpythonpythonpython'
+[42] * 10           #value is [42, 42, 42, 42, 42, 42, 42, 42, 42, 42]
+
+## None, Empty Lists, and Initialization: 
+## None: a Python value symbolizing nothing; can be used to initialize a list with a certain amount of storage
+sequence = [None] * 10      #value is [None, None, None, None, None, None, None, None, None, None]
+
+## Membership: the 'in' operator which is used to check whether a value exists within a sequence; it is 
+##             different from other operators because it returns boolean values
+permissions = 'rw'
+'w' in permissions      #value returned is True
+
+## Length, Minimum, and Maximum: functions used to return the amount of elements and the minimum/maximum 
+##                               values within a sequence
+numero = [100, 34, 678]
+len(numero)     #value is 3
+max(numero)     #value is 678
+min(numero)     #value is 34
+
+## The List Function: used to convert variables, such as strings, into lists for manipulation
+list('Hello')       #function turns the string 'Hello' into a list
+['H', 'e', 'l', 'l', 'o'] 
+someList = ['h','i']
+''.join(someList)   #function exists to convert a list back into a string; someList is a list
+
+## Basic List Operations: basic operations to allow lists to be modified
+x = [1, 1, 1]      
+x[1] = 2         #operation changes the element at index 1 into a different value
+names = ['josephine', 'beth', 'amy', 'meg']
+del names[2]     #operation deletes the element at index 2
+
+## Assigning to Slices: function used to assign several positions to many elements at once
+name = list('Perl')         #value is ['P','e', 'r', 'l'] 
+name[2:] = list('ar')       #replaces the elements from index 2 and beyond; value becomes ['P','e', 'a', 'r'] 
+numbers = [1, 5]            #slice assignments can also be used to insert elements into lists
+numbers[1:1] = [2, 3, 4]    #value is [1, 2, 3, 4, 5]
+
+## List Methods: a method is a function that is tightly coupled to some object; list methods allow for 
+##               examination and modification of contents
+
+## Append: used to append an object to the end of a list
+lst = [1, 2, 3]
+lst.append(4)       #lst becomes [1, 2, 3, 4]
+## since list is a built-in function, using the name list will not enable the function to be called 
+
+## Count: the count method counts the occurrences of an elements in a list
+['to', 'be', 'or', 'not', 'or', 'be'].count('to')       #value is 2
+
+## Extend: method is used to append several values at once by supplying a sequence of the values desired
+a = [1, 2, 3]
+b = [4, 5, 6]
+a.extend(b)         #value of a becomes [1, 2, 3, 4, 5, 6]
+## the difference between extension and concatenation is that the extended sequence is modified whereas
+## concatenation returns a completely new sequence
+
+## Index: used for searching lists to find the index of the first occurance of a specific element
+knights = ['We', 'are', 'the', 'knights', 'who', 'say', 'ni']
+knights.index('who')        #value is 4
+
+## Insert: method is used to insert an object into a list
+numbers = [1, 2, 3, 5, 6, 7]
+numbers.insert(3, 'four')       #value becomes [1, 2, 3, 'four', 5, 6, 7]
+
+## Pop: method removes an element (by default, the last one) from the list and returns it
+x = [1, 2, 3]
+x.pop()         #value is 3; x becomes [1, 2,]
+x.pop(0)        #value is 1
+## the append and pop methods are the reverse of each other so appending the value that is popped returns the 
+## same sequence
+
+## Remove: used to remove the first occurence of a value
+x = ['to', 'be', 'or', 'not', 'to', 'be']
+x.remove('be')      #value of x becomes ['to', 'or', 'not', 'to', 'be']
+
+## Reverse: method reverses the elements in a list
+x = [1, 2, 3]
+x.reverse()     #value of x becomes [3, 2, 1]
+
+## Sort: method is used to sort lists in place, in other words, to change the original list so its elements are 
+## sorted in order rather than returning a sorted copy of the list 
+x = [4, 6, 2, 1, 7, 9]
+x.sort()        #value of x becomes [1, 2, 4, 6, 7, 9]
+## the sorted function returns a sorted copy of the list
+x = [4, 6, 2, 1, 7, 9]
+y = sorted(x)        #value of y becomes [1, 2, 4, 6, 7, 9] while x is unchanged
+
+## Advanced Sorting: it is possible to define a comparison function used as a parameter for sorting rather 
+##                   than using Python's default comparison rules
+cmp(42, 32)     #returns a positive number when x > y
+cmp(99,100)     #returns a negative number when y < x
+cmp(10,10)      #returns 0 when x = y
+
+## Tuples: sequences that cannot be changed
+(1, 2, 3)
+
+
